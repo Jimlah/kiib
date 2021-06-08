@@ -5,8 +5,14 @@ export default class Users extends BaseSchema {
 
   public async up () {
     this.schema.createTable(this.tableName, (table) => {
-      table.increments('id')
-      table.timestamps(true)
+      table.increments('id');
+      table.integer("role_id").notNullable();
+      table.string("email").unique().notNullable();
+      table.string("phone_number").unique().nullable();
+      table.string("password").notNullable();
+      table.string("remember_me_token").nullable();
+      table.boolean("email_verified").defaultTo(0);
+      table.timestamps(true);
     })
   }
 
