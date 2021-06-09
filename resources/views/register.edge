@@ -24,6 +24,11 @@
       <p>{{ flashMessages.get('errors.password_confirmation') || '' }}</p>
     </div>
     <div>
+      <label for="phone_number">Phone Number</label>
+      <input type="tel" name="phone_number" />
+      <p>{{ flashMessages.get('errors.phone_number') || '' }}</p>
+    </div>
+    <div>
       <button type="submit">Create Account</button>
     </div>
   </form>
