@@ -8,7 +8,7 @@ export default class Roles extends BaseSchema {
       table.increments('id');
       table.string("name").notNullable();
       table.string("description").nullable();
-      table.timestamps(true);
+      table.timestamps(true, true);
     })
   }
 

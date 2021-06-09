@@ -12,7 +12,7 @@ export default class Users extends BaseSchema {
       table.string("password").notNullable();
       table.string("remember_me_token").nullable();
       table.boolean("email_verified").defaultTo(0);
-      table.timestamps(true);
+      table.timestamps(true, true);
     })
   }
 
