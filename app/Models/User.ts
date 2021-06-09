@@ -4,14 +4,17 @@ import {
   column,
   beforeSave,
   BaseModel,
-  hasOne,
-  HasOne
+  belongsTo,
+  BelongsTo,
 } from '@ioc:Adonis/Lucid/Orm'
 import Role from './Role'
 
 export default class User extends BaseModel {
   @column({ isPrimary: true })
   public id: number
+
+  @column()
+  public roleId: number
 
   @column()
   public email: string
@@ -38,6 +41,6 @@ export default class User extends BaseModel {
     }
   }
 
-  @hasOne(()=>Role)
-  public profile: HasOne<typeof Role>
+  @belongsTo(()=>Role)
+  public role: BelongsTo<typeof Role>
 }
