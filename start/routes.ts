@@ -27,7 +27,7 @@ Route.get('/', async ({ view }) => {
 Route.on('register').render("register")
 Route.post('register', "AuthController.register")
 
-Route.get("/dashbord", async ({auth}) => {
+Route.get("/dashboard", async ({auth}) => {
   const user = await auth.authenticate();
   return `Hello user! Your Email address is ${user.email}`;
 })

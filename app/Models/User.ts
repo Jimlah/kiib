@@ -5,9 +5,9 @@ import {
   beforeSave,
   BaseModel,
   hasOne,
+  HasOne
 } from '@ioc:Adonis/Lucid/Orm'
 import Role from './Role'
-import { HasOne } from '@ioc:Adonis/Lucid/Relations'
 
 export default class User extends BaseModel {
   @column({ isPrimary: true })
