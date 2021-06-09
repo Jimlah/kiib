@@ -4,7 +4,10 @@ import {
   column,
   beforeSave,
   BaseModel,
+  hasOne,
 } from '@ioc:Adonis/Lucid/Orm'
+import Role from './Role'
+import { HasOne } from '@ioc:Adonis/Lucid/Relations'
 
 export default class User extends BaseModel {
   @column({ isPrimary: true })
@@ -34,4 +37,7 @@ export default class User extends BaseModel {
       user.password = await Hash.make(user.password)
     }
   }
+
+  @hasOne(()=>Role)
+  public profile: HasOne<typeof Role>
 }
