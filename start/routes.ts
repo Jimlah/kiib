@@ -30,7 +30,7 @@ Route.post('register', "AuthController.register")
 Route.get("/dashboard", async ({auth}) => {
   const user = await auth.authenticate();
   await user.preload('role');
-  return `Hello user! Your Email address is ${user.role.name}`;
+  return `Hello user! Your Email address is ${user.email}`;
 })
 
 Route.on("login").render("login");
