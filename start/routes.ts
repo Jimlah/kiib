@@ -27,11 +27,14 @@ Route.get('/', async ({ view }) => {
 Route.on('register').render("register")
 Route.post('register', "AuthController.register")
 
-Route.get("/dashboard", async ({auth}) => {
+Route.get("/dashboard", async ({auth, session}) => {
   const user = await auth.authenticate();
   await user.preload('role');
-  return `Hello user! Your Email address is ${user.role.name}`;
+
+  return `Hello user! Your Email address is ${user.email}. ${session.flashMessages.get('success')}`;
 })
 
 Route.on("login").render("login");
 Route.post("/login", "AuthController.login");
+
+Route.get("/logout", "AuthController.logout");
