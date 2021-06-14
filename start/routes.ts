@@ -24,17 +24,20 @@ Route.get('/', async ({ view }) => {
   return view.render('welcome')
 })
 
-Route.on('register').render("register")
-Route.post('register', "AuthController.register")
+Route.group(() => {
+  Route.on('register').render("register");
+  Route.post('register', "AuthController.register");
+  Route.on("login").render("login");
+  Route.post("/login", "AuthController.login");
+}).middleware('notAuth');
 
-Route.get("/dashboard", async ({auth, session}) => {
+Route.get("/dashboard", async ({ auth }) => {
   const user = await auth.authenticate();
   await user.preload('role');
 
-  return `Hello user! Your Email address is ${user.email}. ${session.flashMessages.get('success')}`;
-})
+  return `Hello user! Your Email address is ${user.email}.`;
+}).middleware('auth');
 
-Route.on("login").render("login");
-Route.post("/login", "AuthController.login");
+
 
 Route.get("/logout", "AuthController.logout");

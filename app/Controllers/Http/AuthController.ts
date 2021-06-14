@@ -20,6 +20,7 @@ export default class AuthController {
 
     const errorMessage = {
       'email.required': "email is required",
+      'email.unique': "email already used",
       'password.required': "password is required",
       'password.confirmed': "Password confirmation is incorrect",
       'phone_number.required': "Phone Number is required"
