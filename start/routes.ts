@@ -25,19 +25,18 @@ Route.get('/', async ({ view }) => {
 })
 
 Route.group(() => {
-  Route.on('register').render("register");
-  Route.post('register', "AuthController.register");
-  Route.on("login").render("login");
-  Route.post("/login", "AuthController.login");
+  Route.on('register').render("register").as('showRegister');
+  Route.post('register', "AuthController.register").as('register');
+  Route.on("login").render("login").as('showLogin');
+  Route.post("/login", "AuthController.login").as('login');
 }).middleware('notAuth');
 
-Route.get("/dashboard", async ({ auth }) => {
-  const user = await auth.authenticate();
-  await user.preload('role');
+Route.group(()=>{
+  Route.get("/logout", "AuthController.logout").as('logout');
 
-  return `Hello user! Your Email address is ${user.email}.`;
-}).middleware('auth');
+  Route.group(()=>{
+    Route.get("/", "Dashboard/MainsController.index").as("dashboard");
+    Route.resource("users", "Dshboard/UsersController")
+  }).prefix('dashboard')
+}).middleware('auth')
 
-
-
-Route.get("/logout", "AuthController.logout");
